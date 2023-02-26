@@ -50,8 +50,6 @@ services:
       SPRING_DATASOURCE_URL: jdbc:postgresql://mds-db:5432/mdsportal
       SPRING_DATASOURCE_USERNAME: mdsadmin
       SPRING_DATASOURCE_PASSWORD: mdsadmin
-    ports:
-      - 8080:8080
     depends_on:
       - mds-db
     networks:
