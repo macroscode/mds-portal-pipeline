@@ -3,8 +3,6 @@ ARG GIT_TOKEN=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
 WORKDIR /project
 RUN git clone -b master https://$GIT_TOKEN@github.com/macroscode/mds-portal-ui.git
 
-
-
 FROM node:alpine AS BUILD
 COPY --from=INIT /project/mds-portal-ui /app
 WORKDIR /app
