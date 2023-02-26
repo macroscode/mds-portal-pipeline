@@ -7,9 +7,9 @@ FROM node:alpine AS BUILD
 COPY --from=INIT /project/mds-portal-ui /app
 WORKDIR /app
 
-COPY package*.json /app/
+# COPY package*.json /app/
 RUN npm install
-COPY . /app/
+# COPY . /app/
 COPY prod-environment.ts /app/src/environment.ts
 RUN npm run build --prod
 
