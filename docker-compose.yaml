@@ -1,0 +1,71 @@
+version: "3.0"
+volumes:
+  mds_data:
+    driver: local
+  auth_data:
+    driver: local
+services:
+  mds-db:
+    image: postgres:latest
+    volumes:
+      - mds_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: mdsportal
+      POSTGRES_USER: mdsadmin
+      POSTGRES_PASSWORD: mdsadmin
+    networks:
+      - mds-network
+  auth-db:
+    image: postgres:latest
+    volumes:
+      - auth_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: keycloak
+      POSTGRES_USER: keycloak
+      POSTGRES_PASSWORD: password
+    networks:
+      - mds-network
+
+  # keycloak:
+  #   build: ./keycloak/.
+  #   restart: on-failure
+  #   platform: linux/amd64
+  #   environment:
+  #     KC_DB: postgres
+  #     KC_DB_URL: auth-db
+  #     KC_DB_USERNAME: keycloak
+  #     KC_DB_PASSWORD: password
+  #     KC_HOSTNAME: localhost
+  #   ports:
+  #     - 8081:8080
+  #   depends_on:
+  #     - auth-db
+  #   networks:
+  #     - mds-network
+  mds-api:
+    build: ./api/.
+    restart: on-failure
+    pull_policy: build
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://mds-db:5432/mdsportal
+      SPRING_DATASOURCE_USERNAME: mdsadmin
+      SPRING_DATASOURCE_PASSWORD: mdsadmin
+    ports:
+      - 8080:8080
+    depends_on:
+      - mds-db
+    networks:
+      - mds-network
+  mds-ui:
+    build: ./ui/.
+    restart: on-failure
+    pull_policy: build
+    ports:
+      - 4200:80
+    depends_on:
+      - mds-api
+    networks:
+      - mds-network
+networks:
+  mds-network:
+    # driver: bridge
