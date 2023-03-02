@@ -38,6 +38,7 @@ services:
       KEYCLOAK_USER: keycloak
       KEYCLOAK_PASSWORD: keycloak
       PROXY_ADDRESS_FORWARDING: "true"
+      KEYCLOAK_FRONTEND_URL: https://mds.coffeeandpaste.co/auth
     depends_on:
       - auth-db
     networks:
