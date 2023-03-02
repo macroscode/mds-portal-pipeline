@@ -37,7 +37,7 @@ services:
       KEYCLOAK_DB: keycloak
       KEYCLOAK_USER: keycloak
       KEYCLOAK_PASSWORD: keycloak
-      KEYCLOAK_PROXY: passthrough
+      KEYCLOAK_PROXY: edge
     depends_on:
       - auth-db
     networks:
