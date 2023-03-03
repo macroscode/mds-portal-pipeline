@@ -52,6 +52,8 @@ services:
       SPRING_DATASOURCE_URL: jdbc:postgresql://mds-db:5432/mdsportal
       SPRING_DATASOURCE_USERNAME: mdsadmin
       SPRING_DATASOURCE_PASSWORD: mdsadmin
+      KEYCLOAK_REALM: "/auth/realms/mds-auth"
+      KEYCLOAK_ALLOWED_ORIGINS: ""
     depends_on:
       - mds-db
     networks:
