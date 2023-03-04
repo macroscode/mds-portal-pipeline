@@ -52,7 +52,7 @@ services:
     container_name: mda-api
     build: ./api/.
     restart: on-failure
-    pull_policy: build
+    pull_policy: always
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://mds-db:5432/mdsportal
       SPRING_DATASOURCE_USERNAME: mdsadmin
@@ -68,7 +68,7 @@ services:
     container_name: mds-ui
     build: ./ui/.
     restart: on-failure
-    pull_policy: build
+    pull_policy: always
     ports:
       - 4200:80
     depends_on:
