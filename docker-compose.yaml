@@ -31,7 +31,7 @@ services:
     image: jboss/keycloak:16.1.1
     restart: on-failure
     environment:
-      DB_ADDR: auth-db
+      DB_ADDR: http://auth-db
       DB_PORT: 5432
       DB_DATABASE: keycloak
       DB_USER: keycloak
@@ -40,7 +40,7 @@ services:
       KEYCLOAK_FRONTEND_URL: https://mds.coffeeandpaste.co/auth
       KEYCLOAK_USER: keycloak
       KEYCLOAK_PASSWORD: keycloak
-      KEYCLOAK_IMPORT: /tmp/realm-export.json
+      # KEYCLOAK_IMPORT: /tmp/realm-export.json
     volumes:
       - ./keycloak-realm/realm-export.json:/tmp/realm-export.json
     depends_on:
