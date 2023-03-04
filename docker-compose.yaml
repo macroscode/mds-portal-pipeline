@@ -54,6 +54,7 @@ services:
       SPRING_DATASOURCE_PASSWORD: mdsadmin
       KEYCLOAK_REALM: "/auth/realms/mds-auth"
       KEYCLOAK_ALLOWED_ORIGINS: ""
+      ENCRYPTION_SEED: "8ad28685c68d2db9ebc6a4c6c8277678"
     depends_on:
       - mds-db
     networks:
