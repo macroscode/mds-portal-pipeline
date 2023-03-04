@@ -31,14 +31,18 @@ services:
     image: jboss/keycloak:16.1.1
     restart: on-failure
     environment:
-      KEYCLOAK_ADMIN: admin
-      KEYCLOAK_ADMIN_PASSWORD: auth-db
-      KEYCLOAK_DB_URL: auth-db:5432
-      KEYCLOAK_DB: keycloak
-      KEYCLOAK_USER: keycloak
-      KEYCLOAK_PASSWORD: keycloak
+      DB_ADDR: auth-db
+      DB_PORT: 5432
+      DB_DATABASE: keycloak
+      DB_USER: keycloak
+      DB_PASSWORD: keycloak
       PROXY_ADDRESS_FORWARDING: "true"
       KEYCLOAK_FRONTEND_URL: https://mds.coffeeandpaste.co/auth
+      KEYCLOAK_USER: keycloak
+      KEYCLOAK_PASSWORD: keycloak
+      KEYCLOAK_IMPORT: /tmp/realm-export.json
+    volumes:
+      - ./keycloak-realm/realm-export.json:/tmp/realm-export.json
     depends_on:
       - auth-db
     networks:
@@ -52,7 +56,7 @@ services:
       SPRING_DATASOURCE_URL: jdbc:postgresql://mds-db:5432/mdsportal
       SPRING_DATASOURCE_USERNAME: mdsadmin
       SPRING_DATASOURCE_PASSWORD: mdsadmin
-      KEYCLOAK_REALM: "/auth/realms/mds-auth"
+      KEYCLOAK_REALM: "https://mds.coffeeandpaste.co/auth/realms/mds-auth"
       KEYCLOAK_ALLOWED_ORIGINS: ""
       ENCRYPTION_SEED: "8ad28685c68d2db9ebc6a4c6c8277678"
     depends_on:
