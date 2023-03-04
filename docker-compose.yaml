@@ -31,6 +31,7 @@ services:
     image: jboss/keycloak:16.1.1
     restart: on-failure
     environment:
+      DB_VENDOR: POSTGRES
       DB_ADDR: auth-db
       DB_PORT: 5432
       DB_DATABASE: keycloak
@@ -51,7 +52,7 @@ services:
     container_name: mda-api
     build: ./api/.
     restart: on-failure
-    pull_policy: build
+    pull_policy: always
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://mds-db:5432/mdsportal
       SPRING_DATASOURCE_USERNAME: mdsadmin
@@ -67,7 +68,7 @@ services:
     container_name: mds-ui
     build: ./ui/.
     restart: on-failure
-    pull_policy: build
+    pull_policy: always
     ports:
       - 4200:80
     depends_on:
