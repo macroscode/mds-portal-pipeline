@@ -1,5 +1,5 @@
 FROM alpine/git AS INIT
-ARG GIT_TOKEN=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
+ENV TOKEN=
 WORKDIR /project
 RUN git clone -b master https://$GIT_TOKEN@github.com/macroscode/mds-portal-ui.git
 

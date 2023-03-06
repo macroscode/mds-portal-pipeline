@@ -50,7 +50,7 @@ services:
       - mds-network
   mds-api:
     container_name: mda-api
-    build: ./api/.
+    image: mds-api:latest
     restart: on-failure
     pull_policy: always
     environment:
@@ -66,7 +66,7 @@ services:
       - mds-network
   mds-ui:
     container_name: mds-ui
-    build: ./ui/.
+    image: mds-ui:latest
     restart: on-failure
     pull_policy: always
     ports:

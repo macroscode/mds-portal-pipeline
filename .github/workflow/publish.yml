@@ -1,0 +1,29 @@
+name: Docker Build and Publish
+
+on:
+  push:
+    branches:
+      - test
+  pull_request:
+    branches:
+      - test
+
+env:
+  DOCKER_REGISTRY: docker.pkg.github.com
+  GITHUB_USERNAME: ${{ secrets.USERNAME }}
+  GITHUB_TOKEN: ${{ secrets.TOKEN }}
+
+
+jobs:
+  build-ui:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Pipeline Repository
+        uses: actions/checkout@v2
+
+      - name: Build Docker Image for MDS UI
+        uses: docker/build-push-action@v2
+        with:
+          context: ./ui/.
+          push: true
+          tags: docker.pkg.github.com/${GITHUB_USERNAME}/mds/mds-ui:latest
