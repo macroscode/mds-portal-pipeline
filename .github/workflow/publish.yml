@@ -1,15 +1,11 @@
 name: Docker Build and Publish
 on:
-  workflow_dispatch:
-      inputs:
-        trigger-manually:
-          description: 'Manually trigger workflow'
-  # push:
-  #   branches:
-  #     - test
-  # pull_request:
-  #   branches:
-  #     - test
+  push:
+    branches:
+      - test
+  pull_request:
+    branches:
+      - test
 
 env:
   DOCKER_REGISTRY: docker.pkg.github.com
