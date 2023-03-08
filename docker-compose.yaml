@@ -2,8 +2,16 @@ version: "3.0"
 volumes:
   mds_data:
     driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: $PWD/db/data
   auth_data:
     driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: $PWD/db/auth_data
 services:
   mds-db:
     container_name: mds-db
@@ -12,8 +20,8 @@ services:
       - mds_data:/var/lib/postgresql/data
     environment:
       POSTGRES_DB: mdsportal
-      POSTGRES_USER: mdsadmin
-      POSTGRES_PASSWORD: mdsadmin
+      POSTGRES_USER: mdsadmin # change for production value 
+      POSTGRES_PASSWORD: mdsadmin # change for production value 
     networks:
       - mds-network
   auth-db:
@@ -23,8 +31,8 @@ services:
       - auth_data:/var/lib/postgresql/data
     environment:
       POSTGRES_DB: keycloak
-      POSTGRES_USER: keycloak
-      POSTGRES_PASSWORD: keycloak
+      POSTGRES_USER: keycloak # change for production value
+      POSTGRES_PASSWORD: keycloak # change for production value
     networks:
       - mds-network
   keycloak:
@@ -35,13 +43,13 @@ services:
       DB_VENDOR: POSTGRES
       DB_ADDR: auth-db
       DB_PORT: 5432
-      DB_DATABASE: keycloak
-      DB_USER: keycloak
-      DB_PASSWORD: keycloak
+      DB_DATABASE: keycloak # should be the same with POSTGRES_DB on auth-db container
+      DB_USER: keycloak # should be the same with POSTGRES_USER on auth-db container
+      DB_PASSWORD: keycloak # should be the same with POSTGRES_PASSWORD on auth-db container
       PROXY_ADDRESS_FORWARDING: "true"
       KEYCLOAK_FRONTEND_URL: http://mds.intranet/auth
-      KEYCLOAK_USER: keycloak
-      KEYCLOAK_PASSWORD: keycloak
+      KEYCLOAK_USER: keycloak # change for production value
+      KEYCLOAK_PASSWORD: keycloak # change for production value
       KEYCLOAK_IMPORT: /tmp/realm-export.json
     volumes:
       - ./realm-export.json:/tmp/realm-export.json
@@ -57,11 +65,11 @@ services:
     pull_policy: always
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://mds-db:5432/mdsportal
-      SPRING_DATASOURCE_USERNAME: mdsadmin
-      SPRING_DATASOURCE_PASSWORD: mdsadmin
+      SPRING_DATASOURCE_USERNAME: mdsadmin # should be the same with POSTGRES_USER on mds-db container
+      SPRING_DATASOURCE_PASSWORD: mdsadmin # should be the same with POSTGRES_PASSWORD on mds-db container
       KEYCLOAK_REALM: "http://mds.intranet/auth/realms/mds-auth"
       KEYCLOAK_ALLOWED_ORIGINS: ""
-      ENCRYPTION_SEED: "my-secret-seed"
+      ENCRYPTION_SEED: "my-secret-seed" # change for production value
     depends_on:
       - mds-db
       - keycloak
