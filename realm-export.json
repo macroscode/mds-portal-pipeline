@@ -29,11 +29,11 @@
   "oauth2DevicePollingInterval" : 5,
   "enabled" : true,
   "sslRequired" : "external",
-  "registrationAllowed" : false,
+  "registrationAllowed" : true,
   "registrationEmailAsUsername" : false,
   "rememberMe" : false,
   "verifyEmail" : false,
-  "loginWithEmailAllowed" : true,
+  "loginWithEmailAllowed" : false,
   "duplicateEmailsAllowed" : false,
   "resetPasswordAllowed" : false,
   "editUsernameAllowed" : false,
@@ -69,6 +69,13 @@
       "containerId" : "mds-auth",
       "attributes" : { }
     }, {
+      "id" : "645c2054-7b03-4682-a8e3-53abff928607",
+      "name" : "super_admin",
+      "composite" : false,
+      "clientRole" : false,
+      "containerId" : "mds-auth",
+      "attributes" : { }
+    }, {
       "id" : "41a22676-cd42-4932-8e03-a9a44078f756",
       "name" : "offline_access",
       "description" : "${role_offline-access}",
@@ -77,7 +84,7 @@
       "containerId" : "mds-auth",
       "attributes" : { }
     }, {
-      "id" : "7ed0b03a-07a4-4882-ac94-a761e94ab0e5",
+      "id" : "8eb7b57a-f796-4de8-bfb3-c79ce42991f5",
       "name" : "admin",
       "composite" : false,
       "clientRole" : false,
@@ -335,7 +342,23 @@
       } ]
     }
   },
-  "groups" : [ ],
+  "groups" : [ {
+    "id" : "13d61ab1-4d4a-4933-b567-c8a4d8a5c29d",
+    "name" : "Admin Group",
+    "path" : "/Admin Group",
+    "attributes" : { },
+    "realmRoles" : [ "admin" ],
+    "clientRoles" : { },
+    "subGroups" : [ ]
+  }, {
+    "id" : "536ee72e-3908-4461-af9b-d01deb67647c",
+    "name" : "Super Admin",
+    "path" : "/Super Admin",
+    "attributes" : { },
+    "realmRoles" : [ "super_admin" ],
+    "clientRoles" : { },
+    "subGroups" : [ ]
+  } ],
   "defaultRole" : {
     "id" : "846c3615-c153-4a65-9c8c-09eb652852a7",
     "name" : "default-roles-mds-auth",
@@ -384,15 +407,35 @@
     "credentials" : [ {
       "id" : "6f2ce25d-cab4-4cb2-8bb0-c824e8520bda",
       "type" : "password",
-      "createdDate" : 1678243342258,
-      "secretData" : "{\"value\":\"enMnDsprjLL/Xr1J2fbCsVMdOg4lVz0zQrnDANUKHKCr/W5twIxv+YPXfj3+bIlFZEHicIaHGo56LmSMe6MKNA==\",\"salt\":\"dwrJY1I7sdbBnVVk+GHCHw==\",\"additionalParameters\":{}}",
+      "createdDate" : 1678509614752,
+      "secretData" : "{\"value\":\"uv0npvjRv+DpjNLpxzMOcTgwy9ZY3xfjCZpfa0z8Bw9UpZXgGnmHrfObsHVNtuo5ZIxyJCX6/WlMgsyf4+ijhw==\",\"salt\":\"JQC3OeE+hRy240YD+rv/Qw==\",\"additionalParameters\":{}}",
       "credentialData" : "{\"hashIterations\":27500,\"algorithm\":\"pbkdf2-sha256\",\"additionalParameters\":{}}"
     } ],
     "disableableCredentialTypes" : [ ],
-    "requiredActions" : [ "UPDATE_PASSWORD" ],
-    "realmRoles" : [ "default-roles-mds-auth", "admin" ],
+    "requiredActions" : [ ],
     "notBefore" : 0,
-    "groups" : [ ]
+    "groups" : [ "/Admin Group" ]
+  }, {
+    "id" : "1822db81-25f0-466c-b094-ea86bd51f20f",
+    "createdTimestamp" : 1678509423858,
+    "username" : "superadmin",
+    "enabled" : true,
+    "totp" : false,
+    "emailVerified" : false,
+    "firstName" : "Super",
+    "lastName" : "Admin",
+    "credentials" : [ {
+      "id" : "9b7ddcd0-6707-4b09-a6b2-2d83ffca400a",
+      "type" : "password",
+      "createdDate" : 1678509655441,
+      "secretData" : "{\"value\":\"lbTN2cKhR25SCL505mrZCBl+p8iO/gXE+lbYq4MQFgDq0DBl+H9yE1b0KBLFufkSeHhQQGD8ReveefWwn5bnOw==\",\"salt\":\"Fzfxi/c3SGz4itJr8YMk+g==\",\"additionalParameters\":{}}",
+      "credentialData" : "{\"hashIterations\":27500,\"algorithm\":\"pbkdf2-sha256\",\"additionalParameters\":{}}"
+    } ],
+    "disableableCredentialTypes" : [ ],
+    "requiredActions" : [ ],
+    "realmRoles" : [ "default-roles-mds-auth" ],
+    "notBefore" : 0,
+    "groups" : [ "/Super Admin" ]
   }, {
     "id" : "83cf8be6-9721-406e-8dd1-33d18afa8056",
     "createdTimestamp" : 1677910246309,
@@ -405,8 +448,8 @@
     "credentials" : [ {
       "id" : "974353a1-e907-48ad-a8fb-391d50cc8fcd",
       "type" : "password",
-      "createdDate" : 1678243358610,
-      "secretData" : "{\"value\":\"0/xbcQeW9vKIIg0V3Vap0JiGdiCtBisa/vkdil0ocb6051xTGvEEhq9deRC+Gq1SqkLBr7ZCYHW0V4hQNlhHiQ==\",\"salt\":\"67Uma2WYr6tBThaWLy++aw==\",\"additionalParameters\":{}}",
+      "createdDate" : 1678509461867,
+      "secretData" : "{\"value\":\"UUphRvtCfPe8EnWGjVTrU4vKNjHizCCS9yHxpnEGNlbhyLzQm6KLl4wKy/+XrsRivLTJzuOQi3fip2B05Zpp4Q==\",\"salt\":\"6jeOwR5zvaYmL8Me9D6RWQ==\",\"additionalParameters\":{}}",
       "credentialData" : "{\"hashIterations\":27500,\"algorithm\":\"pbkdf2-sha256\",\"additionalParameters\":{}}"
     } ],
     "disableableCredentialTypes" : [ ],
@@ -549,8 +592,8 @@
     "enabled" : true,
     "alwaysDisplayInConsole" : false,
     "clientAuthenticatorType" : "client-secret",
-    "redirectUris" : [ "http://mds.intranet/*" ],
-    "webOrigins" : [ ],
+    "redirectUris" : [ "http://mds.intranet/*", "http://localhost:4200/*" ],
+    "webOrigins" : [ "*" ],
     "notBefore" : 0,
     "bearerOnly" : false,
     "consentRequired" : false,
@@ -1134,34 +1177,6 @@
         "max-clients" : [ "200" ]
       }
     }, {
-      "id" : "8cb0a285-dcce-46c5-9515-44a4587d9afc",
-      "name" : "Allowed Protocol Mapper Types",
-      "providerId" : "allowed-protocol-mappers",
-      "subType" : "authenticated",
-      "subComponents" : { },
-      "config" : {
-        "allowed-protocol-mapper-types" : [ "saml-user-property-mapper", "oidc-sha256-pairwise-sub-mapper", "oidc-usermodel-attribute-mapper", "saml-role-list-mapper", "oidc-usermodel-property-mapper", "oidc-address-mapper", "oidc-full-name-mapper", "saml-user-attribute-mapper" ]
-      }
-    }, {
-      "id" : "58b767ab-194d-4427-829c-317814594935",
-      "name" : "Trusted Hosts",
-      "providerId" : "trusted-hosts",
-      "subType" : "anonymous",
-      "subComponents" : { },
-      "config" : {
-        "host-sending-registration-request-must-match" : [ "true" ],
-        "client-uris-must-match" : [ "true" ]
-      }
-    }, {
-      "id" : "354d441f-c859-4e75-a854-42c90b3e96e5",
-      "name" : "Allowed Client Scopes",
-      "providerId" : "allowed-client-templates",
-      "subType" : "authenticated",
-      "subComponents" : { },
-      "config" : {
-        "allow-default-scopes" : [ "true" ]
-      }
-    }, {
       "id" : "fb5b0b24-f1d0-4e87-936c-9f5b89b9a2b8",
       "name" : "Allowed Client Scopes",
       "providerId" : "allowed-client-templates",
@@ -1185,6 +1200,25 @@
       "subComponents" : { },
       "config" : { }
     }, {
+      "id" : "8cb0a285-dcce-46c5-9515-44a4587d9afc",
+      "name" : "Allowed Protocol Mapper Types",
+      "providerId" : "allowed-protocol-mappers",
+      "subType" : "authenticated",
+      "subComponents" : { },
+      "config" : {
+        "allowed-protocol-mapper-types" : [ "saml-user-property-mapper", "oidc-sha256-pairwise-sub-mapper", "oidc-usermodel-attribute-mapper", "saml-role-list-mapper", "oidc-usermodel-property-mapper", "oidc-address-mapper", "oidc-full-name-mapper", "saml-user-attribute-mapper" ]
+      }
+    }, {
+      "id" : "58b767ab-194d-4427-829c-317814594935",
+      "name" : "Trusted Hosts",
+      "providerId" : "trusted-hosts",
+      "subType" : "anonymous",
+      "subComponents" : { },
+      "config" : {
+        "host-sending-registration-request-must-match" : [ "true" ],
+        "client-uris-must-match" : [ "true" ]
+      }
+    }, {
       "id" : "3205bddd-f7f0-41f3-a548-77d867026122",
       "name" : "Allowed Protocol Mapper Types",
       "providerId" : "allowed-protocol-mappers",
@@ -1193,12 +1227,15 @@
       "config" : {
         "allowed-protocol-mapper-types" : [ "oidc-full-name-mapper", "oidc-sha256-pairwise-sub-mapper", "saml-user-attribute-mapper", "oidc-usermodel-property-mapper", "saml-role-list-mapper", "oidc-usermodel-attribute-mapper", "oidc-address-mapper", "saml-user-property-mapper" ]
       }
-    } ],
-    "org.keycloak.userprofile.UserProfileProvider" : [ {
-      "id" : "8554c873-2d01-4ec4-a712-140049418cc7",
-      "providerId" : "declarative-user-profile",
+    }, {
+      "id" : "354d441f-c859-4e75-a854-42c90b3e96e5",
+      "name" : "Allowed Client Scopes",
+      "providerId" : "allowed-client-templates",
+      "subType" : "authenticated",
       "subComponents" : { },
-      "config" : { }
+      "config" : {
+        "allow-default-scopes" : [ "true" ]
+      }
     } ],
     "org.keycloak.keys.KeyProvider" : [ {
       "id" : "b25610d0-ee95-4244-b853-d9cf2f3264f8",
